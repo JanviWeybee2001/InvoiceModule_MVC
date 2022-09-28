@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Add Party";
+}
+
+@model PartyModel
+
+<h2 class="h2 modal-title text-center mt-5">Add Party</h2>
+<br />
+
+@if (ViewBag.IsSuccess == true)
+{
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <strong>Congratulations</strong> You have added new Party successfully. <br />
+    </div>
+}
+else if (ViewBag.IsFailed == true)
+{
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <strong>Oopss !!</strong> This Party is already there. <br />
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="addtxtDiv">
+        <form method="post" asp-action="addParty" asp-controller="Party">
+            <div class="form-group">
+                <label asp-for="@Model.partyName"></label>
+                <input asp-for="@Model.partyName" />
+                <br />
+                <span asp-validation-for="@Model.partyName" class="text-danger"></span>
+            </div>
+            <div class="form-group addButtonDiv">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a type="button" class="btn btn-light" asp-action="allPartyItem" asp-controller="Party">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand"  style="font-size: 25px; color:white"> @_configuration["AppName"]</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-4">
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px" aria-current="page" asp-action="allPartyItem" asp-controller="Party">Party</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px" asp-action="allProductItem" asp-controller="Product">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px" asp-action="allAssignPartyItem" asp-controller="AssignParty">Assign Party</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px" asp-action="allProductRateItem" asp-controller="ProductRate">Product Rate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-size: 20px" asp-controller="Invoice" asp-action="Invoice">Invoice</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PartyModel>
+@{
+    var i = 0;
+}
+
+@{
+    ViewData["Title"] = "All Party";
+}
+
+<h2 class="h2 modal-title text-center mt-5">Party List</h2>
+<br />
+
+<a type="button" class="btn btn-warning float-right mt-1" asp-action="addParty" asp-controller="Party">Add New Party</a>
+<br />
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th class="tableText">#</th>
+            <th class="tableText">Party Name</th>
+            <th class="tableText">Actions</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr class=@(i%2 == 1 ? "table-active" : "")>
+                <th scope="row" class="tableText">@item.id</th>
+                <td class="table-active tableText">@item.partyName</td>
+                <td>
+                    <a asp-controller="Party" asp-action="editParty" asp-route-id="@item.id" data-value="@item.id" asp-route-partyname="@item.partyName" class="btn btn-success mr-3">Edit</a>
+                    <a asp-controller="Party" asp-action="DeleteParty" data-value="@item.id" asp-route-id="@item.id" class="btn btn-danger ml-3">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

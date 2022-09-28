@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Edit Party";
+}
+
+@model PartyModel
+
+<h2 class="h2 modal-title text-center mt-5">Edit Party</h2>
+<br />
+
+@if (ViewBag.IsSuccess == true)
+{
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <strong>Congratulations</strong> You have updated Party successfully. <br />
+    </div>
+}
+
+@ViewBag.id
+
+<div class="container mt-5">
+    <div class="addtxtDiv">
+        <form method="post" asp-action="editParty" asp-controller="Party">
+            <div class="form-group">
+                <label asp-for="partyName"></label>
+                <input asp-for="partyName" />
+                <br />
+                <span asp-validation-for="partyName" class="text-danger"></span>
+            </div>
+            <div class="form-group addButtonDiv">
+                <input type="submit" value="Update" class="btn btn-success"/>
+                <a type="button" class="btn btn-light" asp-action="allPartyItem" asp-controller="Party">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

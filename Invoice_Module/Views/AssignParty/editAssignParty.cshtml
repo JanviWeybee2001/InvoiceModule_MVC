@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Edit Assign Party";
+}
+@inject Invoice_Module.Repository.PartyRepository partyRepository
+@inject Invoice_Module.Repository.ProductRepository productRepository
+@model AssignPartyModel
+
+<h2 class="h2 modal-title text-center mt-5">Edit Assign Party</h2>
+<br />
+
+<div class="container mt-5">
+    <div class="addtxtDiv">
+        <form method="post" asp-action="editAssignParty" asp-controller="AssignParty">
+            <div class="form-group">
+                <label asp-for="partyId" class="col-sm-2 col-form-label">Party Name :</label>
+                <select  asp-for="partyId" class="col-sm-3" asp-items="(await partyRepository.GetAllParty()).Select(x => new SelectListItem() { Value = x.id.ToString(), Text = x.partyName })">
+                    <option value="">Choose Party</option>
+                </select>
+                <br />
+                <span asp-validation-for="partyId" class="text-danger ml-3"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="productId" class="col-sm-2 col-form-label">Product Name :</label>
+                <select  asp-for="productId" class="col-sm-3" asp-items="(await productRepository.GetAllProduct()).Select(x => new SelectListItem() { Value = x.id.ToString(), Text = x.productName })">
+                    <option value="">Choose Product</option>
+                </select>
+                <br />
+                <span asp-validation-for="productId" class="text-danger ml-3"></span>
+            </div>
+            <br />
+            <div class="form-group addButtonDiv">
+                <input type="submit" value="Update" class="btn btn-success" />
+                <a class="btn btn-light" asp-action="allAssignPartyItem" asp-controller="AssignParty">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

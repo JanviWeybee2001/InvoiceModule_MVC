@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AssignPartyModel>
+@{
+    var i = 0;
+}
+
+@{
+    ViewData["Title"] = "Assign Party_product";
+}
+
+<h2 class="h2 modal-title text-center mt-5">Assign Party List</h2>
+<br />
+
+<a type="button" class="btn btn-warning float-right mt-1" asp-action="addAssignParty" asp-controller="AssignParty">Add New Assign</a>
+<br />
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th class="tableText">#</th>
+            <th class="tableText">Party Name</th>
+            <th class="tableText">Product Name</th>
+            <th class="tableText">Actions</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr class=@(i%2 == 1 ? "table-active" : "")>
+                <th scope="row" class="tableText">@item.id</th>
+                <td class="table-active tableText">@item.Party.partyName</td>
+                <td class="table-active tableText">@item.Product.productName</td>
+                <td>
+                    <a asp-controller="AssignParty" asp-action="editAssignParty" asp-route-id="@item.id" asp-route-partyid="@item.partyId" asp-route-productid="@item.productId" data-value="@item.id" class="btn btn-success mr-3">Edit</a>
+                    <a asp-controller="AssignParty" asp-action="deleteAssignParty" data-value="@item.id" asp-route-id="@item.id" class="btn btn-danger ml-3" onclick="return confirm('Do you want to Delete this Assigned Party ?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

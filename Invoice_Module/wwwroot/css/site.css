@@ -1,0 +1,45 @@
+﻿*{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navItem {
+    font-size: 17px;
+}
+
+.tableText {
+    font-size:20px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    white-space: nowrap;
+    line-height: 40px;
+}
+
+.addtxtDiv {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.addButtonDiv {
+    display: flex;
+    line-height: 40px;
+    gap: 35px;
+    width: 100%;
+    justify-content: center;
+    margin: 30px;
+}
+
+.addtxtfield {
+    line-height: 40px;
+    height: 35px;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+}
