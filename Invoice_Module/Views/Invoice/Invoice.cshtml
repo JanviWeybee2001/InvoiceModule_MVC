@@ -8,16 +8,14 @@
 
 @if (ViewBag.IsSuccess == true)
 {
-    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-        <strong>Congratulations</strong> You have added new Invoice successfully. <br />
-    </div>
-}
-else if (ViewBag.IsFailed == true)
-{
-    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-        <strong>Oopss !!</strong> There is Some issue. <br />
-    </div>
-}
+<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+    <strong>Congratulations</strong> You have added new Invoice successfully. <br />
+</div> }
+            else if (ViewBag.IsFailed == true)
+            {
+<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+    <strong>Oopss !!</strong> There is Some issue. <br />
+</div>}
 
 
 <div class="container">
@@ -51,7 +49,7 @@ else if (ViewBag.IsFailed == true)
             <div class="form-group">
                 <label asp-for="Quantity" class="col-sm-2 col-form-label">Quantity :</label>
                 <input asp-for="Quantity" class="col-sm-3" type="number" />
-            <br />
+                <br />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
 
@@ -66,9 +64,10 @@ else if (ViewBag.IsFailed == true)
         </form>
     </div>
 </div>
-
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/jquery.js"></script>
+@*<script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>*@
 <script>
     $(document).ready(function () {
 

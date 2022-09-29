@@ -24,7 +24,7 @@ namespace Invoice_Module.Models
         [Required(ErrorMessage = "Please Enter Current Rate Of Product")]
         public int CurrentRate { get; set; }
 
-        [Range(1,500, ErrorMessage = "Quantity shold be at least 1")]
+        [Range(1,int.MaxValue, ErrorMessage = "Quantity shold be at least 1")]
         [Display(Name = "Quantity")]
         [Required(ErrorMessage = "Please Enter Quantity")]
         public int Quantity { get; set; }
