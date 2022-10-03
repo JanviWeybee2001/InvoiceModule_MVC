@@ -70,14 +70,20 @@ namespace Invoice_Module.Repository
         }
 
 
-        public async Task editProduct(int id, ProductModel productModel)
+        public async Task editProduct(int id, ProductModel model)
         {
-            var newProduct = new Product()
+            var y = _context.Product
+                   .Where(x => x.productName == model.productName).FirstOrDefault();
+
+            if (y == null)
             {
-                id = id,
-                productName = productModel.productName
-            };
-            _context.Product.Update(newProduct);
+                var newProduct = new Product()
+                {
+                    id = id,
+                    productName = model.productName
+                };
+                _context.Product.Update(newProduct);
+            }
             await _context.SaveChangesAsync();
         }
 

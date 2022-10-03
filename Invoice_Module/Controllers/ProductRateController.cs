@@ -49,7 +49,7 @@ namespace Invoice_Module.Controllers
         }
 
         [HttpGet("EditProductRate/{id}/{productId}/{rate}")]
-        public IActionResult editProductRate(int productId, int rate, int isSuccess = 0, [FromRoute] int productRateId = 0)
+        public IActionResult editProductRate(int productId, int rate, bool isSuccess = false, [FromRoute] int productRateId = 0)
         {
             return View();
         }

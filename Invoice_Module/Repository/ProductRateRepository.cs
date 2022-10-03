@@ -56,17 +56,28 @@ namespace Invoice_Module.Repository
 
         public async Task<int> editProductRate(int id, ProductRateModel productRateModel)
         {
-            var productRate = new ProductRate()
-            {
-                id = id,
-                productId = productRateModel.ProductId,
-                Rate = productRateModel.Rate,
-                DateOfRate = productRateModel.DateOfRate
-            };
+            var y = _context.ProductRate
+                    .Where(x => x.productId == productRateModel.ProductId).FirstOrDefault();
 
-            _context.ProductRate.Update(productRate);
-            await _context.SaveChangesAsync();
-            return productRate.id;
+            if (y == null)
+            {
+                var productRate = new ProductRate()
+                {
+                    id = id,
+                    productId = productRateModel.ProductId,
+                    Rate = productRateModel.Rate,
+                    DateOfRate = productRateModel.DateOfRate
+                };
+
+                _context.ProductRate.Update(productRate);
+                await _context.SaveChangesAsync();
+                return productRate.id;
+            }
+            else
+            {
+                return id;
+            }
+
         }
 
         public async Task<bool> deleteProductRate(int id, ProductRateModel productRateModel)

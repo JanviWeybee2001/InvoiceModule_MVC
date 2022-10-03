@@ -8,14 +8,16 @@
 
 @if (ViewBag.IsSuccess == true)
 {
-<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-    <strong>Congratulations</strong> You have added new Invoice successfully. <br />
-</div> }
-            else if (ViewBag.IsFailed == true)
-            {
-<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-    <strong>Oopss !!</strong> There is Some issue. <br />
-</div>}
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <strong>Congratulations</strong> You have added new Invoice successfully. <br />
+    </div> 
+}
+else if (ViewBag.IsFailed == true)
+{
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <strong>Oopss !!</strong> There is Some issue. <br />
+    </div>
+}
 
 
 <div class="container">

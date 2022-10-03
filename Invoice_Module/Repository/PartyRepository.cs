@@ -72,12 +72,18 @@ namespace Invoice_Module.Repository
 
         public async Task editParty(int id, PartyModel partyModel)
         {
-            var newParty = new Party()
+            var y = _context.Party
+                    .Where(x => x.partyName == partyModel.partyName).FirstOrDefault();
+
+            if (y == null)
             {
-                id = id,
-                partyName = partyModel.partyName
-            };
-            _context.Party.Update(newParty);
+                var newParty = new Party()
+                {
+                    id = id,
+                    partyName = partyModel.partyName
+                };
+                _context.Party.Update(newParty);
+            }
             await _context.SaveChangesAsync();
         }
     }
