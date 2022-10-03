@@ -62,17 +62,24 @@ namespace Invoice_Module.Controllers
         }
 
         [HttpGet("editParty/{id}/{partyName}")]
-        public IActionResult editParty(string partyName, bool isSuccess = false, [FromRoute] int partyId = 0)
+        public IActionResult editParty(string partyName, bool isSuccess = false, bool isFailed = false, [FromRoute] int partyId = 0)
         {
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.IsFailed = isFailed;
+            ViewBag.PartyName = partyName;
             return View();
         }
 
         [HttpPost("editParty/{id}/{partyName}")]
-        public async Task<IActionResult> editParty([FromRoute] int id, PartyModel partyModel)
+        public async Task<IActionResult> editParty([FromRoute] int id, PartyModel model)
         {
             if (ModelState.IsValid)
             {
-                await partyRepository.editParty(id, partyModel);
+                int ids = await partyRepository.editParty(id, model);
+                if(ids == 0)
+                    return RedirectToAction("editParty", new { isFailed = true });
+
+                return RedirectToAction("editParty", new { isSuccess = true, partyName = model.partyName});
             }
             return RedirectToAction("allPartyItem");
         }

@@ -13,6 +13,7 @@ namespace Invoice_Module.Data
         {
 
         }
+
         public DbSet<Party> Party { get; set; }
         
         public DbSet<Product> Product { get; set; }

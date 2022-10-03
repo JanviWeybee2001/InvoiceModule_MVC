@@ -54,7 +54,7 @@ namespace Invoice_Module.Repository
         public async Task<int> editAssignParty(int id, AssignPartyModel assignPartyModel)
         {
             var y = _context.AssignParty
-                    .Where(x => x.partyId == assignPartyModel.partyId && x.productId == assignPartyModel.productId).FirstOrDefault();
+                    .Where(x => x.partyId == assignPartyModel.partyId && x.productId == assignPartyModel.productId && x.id!=id).FirstOrDefault();
 
             if (y == null)
             {

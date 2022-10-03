@@ -70,10 +70,10 @@ namespace Invoice_Module.Repository
         }
         
 
-        public async Task editParty(int id, PartyModel partyModel)
+        public async Task<int> editParty(int id, PartyModel partyModel)
         {
             var y = _context.Party
-                    .Where(x => x.partyName == partyModel.partyName).FirstOrDefault();
+                    .Where(x => x.partyName == partyModel.partyName && x.id!=id).FirstOrDefault();
 
             if (y == null)
             {
@@ -83,8 +83,10 @@ namespace Invoice_Module.Repository
                     partyName = partyModel.partyName
                 };
                 _context.Party.Update(newParty);
+                await _context.SaveChangesAsync();
+                return id;
             }
-            await _context.SaveChangesAsync();
+            return 0;
         }
     }
 }

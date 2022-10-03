@@ -13,6 +13,13 @@
         <strong>Congratulations</strong> You have updated Party successfully. <br />
     </div>
 }
+else if (ViewBag.IsFailed == true)
+{
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <strong>Oopss !!</strong> This Party is already there. <br />
+    </div>
+}
+
 
 @ViewBag.id
 
@@ -21,12 +28,12 @@
         <form method="post" asp-action="editParty" asp-controller="Party">
             <div class="form-group">
                 <label asp-for="partyName"></label>
-                <input asp-for="partyName" />
+                <input asp-for="partyName" value=@ViewBag.PartyName/>
                 <br />
                 <span asp-validation-for="partyName" class="text-danger"></span>
             </div>
             <div class="form-group addButtonDiv">
-                <input type="submit" value="Update" class="btn btn-success"/>
+                <input type="submit" value="Update" class="btn btn-success" />
                 <a type="button" class="btn btn-light" asp-action="allPartyItem" asp-controller="Party">Cancel</a>
             </div>
         </form>

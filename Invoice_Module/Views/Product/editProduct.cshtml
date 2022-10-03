@@ -13,13 +13,19 @@
         <strong>Congratulations</strong> You have updated new Product successfully. <br />
     </div>
 }
+else if (ViewBag.IsFailed == true)
+{
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <strong>Oopss !!</strong> This Product is already there. <br />
+    </div>
+}
 
 <div class="container mt-5">
     <div class="addtxtDiv">
         <form method="post" asp-action="editProduct" asp-controller="Product">
             <div class="form-group">
                 <label asp-for="productName"></label>
-                <input asp-for="productName" />
+                <input asp-for="productName" value=@ViewBag.ProductName/>
                 <br />
                 <span asp-validation-for="productName" class="text-danger"></span>
             </div>

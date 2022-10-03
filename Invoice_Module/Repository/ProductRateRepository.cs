@@ -57,7 +57,7 @@ namespace Invoice_Module.Repository
         public async Task<int> editProductRate(int id, ProductRateModel productRateModel)
         {
             var y = _context.ProductRate
-                    .Where(x => x.productId == productRateModel.ProductId).FirstOrDefault();
+                    .Where(x => x.productId == productRateModel.ProductId && x.id!=id).FirstOrDefault();
 
             if (y == null)
             {
@@ -75,7 +75,7 @@ namespace Invoice_Module.Repository
             }
             else
             {
-                return id;
+                return 0;
             }
 
         }

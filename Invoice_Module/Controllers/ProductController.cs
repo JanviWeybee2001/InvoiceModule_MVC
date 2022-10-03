@@ -60,17 +60,24 @@ namespace Invoice_Module.Controllers
         }
 
         [HttpGet("editProduct/{id}/{productName}")]
-        public IActionResult editProduct(string productName, bool isSuccess = false, [FromRoute] int id = 0)
+        public IActionResult editProduct(string productName, bool isSuccess = false, bool isFailed = false, [FromRoute] int id = 0)
         {
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.IsFailed = isFailed;
+            ViewBag.ProductName = productName;
             return View();
         }
 
         [HttpPost("editProduct/{id}/{productName}")]
-        public async Task<IActionResult> editProduct([FromRoute] int id, ProductModel productModel)
+        public async Task<IActionResult> editProduct([FromRoute] int id, ProductModel model)
         {
             if (ModelState.IsValid)
             {
-                await productRepository.editProduct(id, productModel);
+                int ids = await productRepository.editProduct(id, model);
+                if (ids == 0)
+                    return RedirectToAction("editProduct", new { isFailed = true });
+
+                return RedirectToAction("editProduct", new { isSuccess = true , productName = model.productName});
             }
             return RedirectToAction("allProductItem");
         }

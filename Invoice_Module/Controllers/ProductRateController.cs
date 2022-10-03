@@ -49,8 +49,10 @@ namespace Invoice_Module.Controllers
         }
 
         [HttpGet("EditProductRate/{id}/{productId}/{rate}")]
-        public IActionResult editProductRate(int productId, int rate, bool isSuccess = false, [FromRoute] int productRateId = 0)
+        public IActionResult editProductRate(int productId, int rate, bool isSuccess = false, bool isFailed = false, [FromRoute] int productRateId = 0)
         {
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.IsFailed = isFailed;
             return View();
         }
 
@@ -59,7 +61,10 @@ namespace Invoice_Module.Controllers
         {
             if (ModelState.IsValid)
             {
-                await productRateRepository.editProductRate(id, productRateModel);
+                int ids = await productRateRepository.editProductRate(id, productRateModel);
+                if(ids == 0)
+                    return RedirectToAction("editProductRate", new { isFailed = true });
+                return RedirectToAction("editProductRate", new { isSuccess = true });
             }
             return RedirectToAction("allProductRateItem");
         }

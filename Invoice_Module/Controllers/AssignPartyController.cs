@@ -56,8 +56,10 @@ namespace Invoice_Module.Controllers
         }
 
         [HttpGet("EditAssignParty/{id}/{partyId}/{productId}")]
-        public IActionResult editAssignParty(int partyId, int productId, [FromRoute] int assignPartyId = 0)
+        public IActionResult editAssignParty(int partyId, int productId, bool isSuccess = false, bool isFailed = false, [FromRoute] int assignPartyId = 0)
         {
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.IsFailed = isFailed;
             return View();
         }
 
@@ -66,7 +68,11 @@ namespace Invoice_Module.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _assignPartyRepository.editAssignParty(id, assignPartyModel);
+                int ids = await _assignPartyRepository.editAssignParty(id, assignPartyModel);
+                if (ids == 0)
+                    return RedirectToAction("editAssignParty", new { isFailed = true });
+
+                return RedirectToAction("editAssignParty", new { isSuccess = true });
             }
             return RedirectToAction("allAssignPartyItem");
         }

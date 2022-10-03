@@ -88,7 +88,7 @@ namespace Invoice_Module.Repository
             {
                 _context.Invoice.Remove(item);
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
