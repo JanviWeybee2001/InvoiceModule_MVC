@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Add Assign Party";
 }
-@inject Invoice_Module.Repository.PartyRepository partyRepository
-@inject Invoice_Module.Repository.ProductRepository productRepository
+@inject Invoice_Module.Repository.IPartyRepository partyRepository
+@inject Invoice_Module.Repository.IProductRepository productRepository
 @model AssignPartyModel
 
 <h2 class="h2 modal-title text-center mt-5">Add Assign Party</h2>

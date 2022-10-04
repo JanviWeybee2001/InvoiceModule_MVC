@@ -10,9 +10,9 @@ namespace Invoice_Module.Controllers
 {
     public class PartyController : Controller
     {
-        private readonly PartyRepository partyRepository = null;
+        private readonly IPartyRepository partyRepository = null;
 
-        public PartyController(PartyRepository _partyRepository)
+        public PartyController(IPartyRepository _partyRepository)
         {
             partyRepository = _partyRepository;
         }

@@ -8,7 +8,7 @@ using Invoice_Module.Data;
 
 namespace Invoice_Module.Repository
 {
-    public class AssignPartyRepository
+    public class AssignPartyRepository : IAssignPartyRepository
     {
 
         private readonly InvoiceModuleContext _context = null;
@@ -46,7 +46,7 @@ namespace Invoice_Module.Repository
                 await _context.AssignParty.AddAsync(newAssignParty);
                 await _context.SaveChangesAsync();
 
-                return newAssignParty.id; 
+                return newAssignParty.id;
             }
             return 0;
         }
@@ -54,7 +54,7 @@ namespace Invoice_Module.Repository
         public async Task<int> editAssignParty(int id, AssignPartyModel assignPartyModel)
         {
             var y = _context.AssignParty
-                    .Where(x => x.partyId == assignPartyModel.partyId && x.productId == assignPartyModel.productId && x.id!=id).FirstOrDefault();
+                    .Where(x => x.partyId == assignPartyModel.partyId && x.productId == assignPartyModel.productId && x.id != id).FirstOrDefault();
 
             if (y == null)
             {

@@ -33,15 +33,15 @@ namespace Invoice_Module
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
 
-            services.AddScoped<PartyRepository, PartyRepository>();
+            services.AddScoped<IPartyRepository, PartyRepository>();
 
-            services.AddScoped<ProductRepository, ProductRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddScoped<AssignPartyRepository, AssignPartyRepository>();
+            services.AddScoped<IAssignPartyRepository, AssignPartyRepository>();
 
-            services.AddScoped<ProductRateRepository, ProductRateRepository>();
+            services.AddScoped<IProductRateRepository, ProductRateRepository>();
 
-            services.AddScoped<InvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
         }
 

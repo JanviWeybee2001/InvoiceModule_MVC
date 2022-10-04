@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Invoice_Module.Repository
 {
-    public class ProductRateRepository
+    public class ProductRateRepository : IProductRateRepository
     {
         private readonly InvoiceModuleContext _context = null;
 
@@ -41,7 +41,7 @@ namespace Invoice_Module.Repository
                 {
                     productId = productRateModel.ProductId,
                     Rate = productRateModel.Rate,
-                    DateOfRate = productRateModel.DateOfRate
+                    DateOfRate = DateTime.Now
                 };
 
                 await _context.ProductRate.AddAsync(productRate);
@@ -57,7 +57,7 @@ namespace Invoice_Module.Repository
         public async Task<int> editProductRate(int id, ProductRateModel productRateModel)
         {
             var y = _context.ProductRate
-                    .Where(x => x.productId == productRateModel.ProductId && x.id!=id).FirstOrDefault();
+                    .Where(x => x.productId == productRateModel.ProductId && x.id != id).FirstOrDefault();
 
             if (y == null)
             {
@@ -66,7 +66,7 @@ namespace Invoice_Module.Repository
                     id = id,
                     productId = productRateModel.ProductId,
                     Rate = productRateModel.Rate,
-                    DateOfRate = productRateModel.DateOfRate
+                    DateOfRate = DateTime.Now
                 };
 
                 _context.ProductRate.Update(productRate);

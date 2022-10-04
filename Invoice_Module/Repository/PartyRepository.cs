@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Invoice_Module.Repository
 {
-    public class PartyRepository
+    public class PartyRepository : IPartyRepository
     {
         private readonly InvoiceModuleContext _context = null;
 
@@ -47,7 +47,7 @@ namespace Invoice_Module.Repository
                 {
                     parties.Add(new PartyModel()
                     {
-                        id=party.id,
+                        id = party.id,
                         partyName = party.partyName
                     });
                 }
@@ -57,7 +57,7 @@ namespace Invoice_Module.Repository
 
         public async Task<bool> DeletePartyAsync(int id, PartyModel partyModel)
         {
-            if(id == partyModel.id)
+            if (id == partyModel.id)
             {
                 var party = new Party()
                 {
@@ -68,12 +68,12 @@ namespace Invoice_Module.Repository
             await _context.SaveChangesAsync();
             return true;
         }
-        
+
 
         public async Task<int> editParty(int id, PartyModel partyModel)
         {
             var y = _context.Party
-                    .Where(x => x.partyName == partyModel.partyName && x.id!=id).FirstOrDefault();
+                    .Where(x => x.partyName == partyModel.partyName && x.id != id).FirstOrDefault();
 
             if (y == null)
             {

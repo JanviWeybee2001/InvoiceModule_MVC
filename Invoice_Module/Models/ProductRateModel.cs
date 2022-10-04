@@ -20,7 +20,7 @@ namespace Invoice_Module.Models
         [Display(Name = "Product Rate:")]
         public int Rate { get; set; }
 
-        [Required(ErrorMessage = "Please add Date of Rate")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-mm-yyyy}")]
         [Display(Name = "Date of Rate:")]
         public DateTime DateOfRate { get; set; }
     }

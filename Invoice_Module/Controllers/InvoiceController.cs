@@ -10,10 +10,10 @@ namespace Invoice_Module.Controllers
 {
     public class InvoiceController : Controller
     {
-        private readonly InvoiceRepository _invoiceRepository = null;
-        private readonly AssignPartyRepository _assignPartyRepository = null;
+        private readonly IInvoiceRepository _invoiceRepository = null;
+        private readonly IAssignPartyRepository _assignPartyRepository = null;
 
-        public InvoiceController(InvoiceRepository invoiceRepository, AssignPartyRepository assignPartyRepository)
+        public InvoiceController(IInvoiceRepository invoiceRepository, IAssignPartyRepository assignPartyRepository)
         {
             _invoiceRepository = invoiceRepository;
             _assignPartyRepository = assignPartyRepository;

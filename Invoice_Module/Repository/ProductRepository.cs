@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Invoice_Module.Repository
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly InvoiceModuleContext _context = null;
 
@@ -41,9 +41,9 @@ namespace Invoice_Module.Repository
         {
             var products = new List<ProductModel>();
             var allproducts = await _context.Product.ToListAsync();
-            if(allproducts?.Any()==true)
+            if (allproducts?.Any() == true)
             {
-                foreach(var product in allproducts)
+                foreach (var product in allproducts)
                 {
                     products.Add(new ProductModel()
                     {

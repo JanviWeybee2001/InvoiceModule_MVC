@@ -10,9 +10,9 @@ namespace Invoice_Module.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductRepository productRepository = null;
+        private readonly IProductRepository productRepository = null;
 
-        public ProductController(ProductRepository _productRepository)
+        public ProductController(IProductRepository _productRepository)
         {
             productRepository = _productRepository;
         }

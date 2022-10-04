@@ -10,20 +10,20 @@ namespace Invoice_Module.Controllers
 {
     public class ProductRateController : Controller
     {
-        private readonly ProductRateRepository productRateRepository = null;
+        private readonly IProductRateRepository productRateRepository = null;
 
-        public ProductRateController(ProductRateRepository _productRateRepository)
+        public ProductRateController(IProductRateRepository _productRateRepository)
         {
             productRateRepository = _productRateRepository;
         }
-
+       
         public async Task<IActionResult> allProductRateItem()
         {
             var data = await productRateRepository.GetAllProdustRateItems();
             return View(data);
         }
 
-        public IActionResult addProductRate(bool isSuccess = false, bool isFailed = false)
+        public async Task<IActionResult> addProductRate(bool isSuccess = false, bool isFailed = false)
         {
             ViewBag.IsSuccess = isSuccess;
             ViewBag.IsFailed = isFailed;

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Invoice_Module.Repository
 {
-    public class InvoiceRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
         private readonly InvoiceModuleContext _context = null;
 

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Add Product's Rate";
 }
-@inject Invoice_Module.Repository.ProductRepository productRepository
+@inject Invoice_Module.Repository.IProductRepository productRepository
 @model ProductRateModel
 
 <h2 class="h2 modal-title text-center mt-5">Add Rate of Product</h2>
@@ -39,7 +39,7 @@ else if (ViewBag.IsFailed == true)
             </div>
             <div class="form-group">
                 <label asp-for="@Model.DateOfRate" class="col-sm-2 col-form-label"></label>
-                <input asp-for="@Model.DateOfRate" class="col-sm-3" />
+                <input asp-for="@Model.DateOfRate" type="date" class="col-sm-3" value=@DateTime.Today.ToString("yyyy-MM-dd") />
                 <br />
                 <span asp-validation-for="@Model.DateOfRate" class="text-danger"></span>
             </div>
