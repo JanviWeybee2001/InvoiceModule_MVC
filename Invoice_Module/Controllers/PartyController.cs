@@ -18,8 +18,9 @@ namespace Invoice_Module.Controllers
         }
 
         [Route("~/Party")]
-        public async Task<IActionResult> allPartyItem()
+        public async Task<IActionResult> allPartyItem(bool isFailed = false)
         {
+            ViewBag.IsFailed = isFailed;
             var data = await partyRepository.GetAllParty();
             return View(data);
         }
@@ -58,26 +59,25 @@ namespace Invoice_Module.Controllers
             {
                 return RedirectToAction("allPartyItem");
             }
-            return null;
+            return RedirectToAction("allPartyItem",new { isFailed = true });
         }
 
-        [HttpGet("editParty/{id}/{partyName}")]
+        [HttpGet("editParty/{id}")]
         public IActionResult editParty(string partyName, bool isSuccess = false, bool isFailed = false, [FromRoute] int partyId = 0)
         {
             ViewBag.IsSuccess = isSuccess;
             ViewBag.IsFailed = isFailed;
-            ViewBag.PartyName = partyName;
             return View();
         }
 
-        [HttpPost("editParty/{id}/{partyName}")]
+        [HttpPost("editParty/{id}")]
         public async Task<IActionResult> editParty([FromRoute] int id, PartyModel model)
         {
             if (ModelState.IsValid)
             {
                 int ids = await partyRepository.editParty(id, model);
                 if(ids == 0)
-                    return RedirectToAction("editParty", new { isFailed = true });
+                    return RedirectToAction("editParty", new { isFailed = true, partyName = model.partyName });
 
                 return RedirectToAction("editParty", new { isSuccess = true, partyName = model.partyName});
             }

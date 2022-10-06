@@ -57,16 +57,27 @@ namespace Invoice_Module.Repository
 
         public async Task<bool> DeletePartyAsync(int id, PartyModel partyModel)
         {
-            if (id == partyModel.id)
+            var check = _context.AssignParty.Where(x => x.partyId == partyModel.id).FirstOrDefault();
+            var checkInvoice = _context.Invoice.Where(x => x.PartyId == id).ToList();
+            if (check==null)
             {
-                var party = new Party()
+                if (id == partyModel.id)
                 {
-                    id = id
-                };
-                _context.Party.Remove(party);
+                    var party = new Party()
+                    {
+                        id = id
+                    };
+                    _context.Party.Remove(party);
+                }
+                if (checkInvoice != null)
+                {
+                    _context.Invoice.RemoveRange(checkInvoice);
+                }
+                await _context.SaveChangesAsync();
+                return true;
             }
-            await _context.SaveChangesAsync();
-            return true;
+            return false;
+            
         }
 
 

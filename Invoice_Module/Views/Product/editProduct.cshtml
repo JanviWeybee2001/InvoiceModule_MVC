@@ -25,7 +25,7 @@ else if (ViewBag.IsFailed == true)
         <form method="post" asp-action="editProduct" asp-controller="Product">
             <div class="form-group">
                 <label asp-for="productName"></label>
-                <input asp-for="productName" value=@ViewBag.ProductName/>
+                <input asp-for="productName"/>
                 <br />
                 <span asp-validation-for="productName" class="text-danger"></span>
             </div>

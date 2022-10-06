@@ -41,7 +41,7 @@ namespace Invoice_Module.Repository
                 {
                     productId = productRateModel.ProductId,
                     Rate = productRateModel.Rate,
-                    DateOfRate = DateTime.Now
+                    DateOfRate = productRateModel.DateOfRate
                 };
 
                 await _context.ProductRate.AddAsync(productRate);
@@ -66,7 +66,7 @@ namespace Invoice_Module.Repository
                     id = id,
                     productId = productRateModel.ProductId,
                     Rate = productRateModel.Rate,
-                    DateOfRate = DateTime.Now
+                    DateOfRate = productRateModel.DateOfRate
                 };
 
                 _context.ProductRate.Update(productRate);

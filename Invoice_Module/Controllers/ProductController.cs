@@ -18,8 +18,9 @@ namespace Invoice_Module.Controllers
         }
 
         [Route("~/AllProduct")]
-        public async Task<IActionResult> allProductItem()
+        public async Task<IActionResult> allProductItem(bool isFailed = false)
         {
+            ViewBag.IsFailed = isFailed;
             var data = await productRepository.GetAllProduct();
             return View(data);
         }
@@ -56,26 +57,25 @@ namespace Invoice_Module.Controllers
             {
                 return RedirectToAction("allProductItem");
             }
-            return null;
+            return RedirectToAction("allProductItem", new { isFailed = true });
         }
 
-        [HttpGet("editProduct/{id}/{productName}")]
+        [HttpGet("editProduct/{id}")]
         public IActionResult editProduct(string productName, bool isSuccess = false, bool isFailed = false, [FromRoute] int id = 0)
         {
             ViewBag.IsSuccess = isSuccess;
             ViewBag.IsFailed = isFailed;
-            ViewBag.ProductName = productName;
             return View();
         }
 
-        [HttpPost("editProduct/{id}/{productName}")]
+        [HttpPost("editProduct/{id}")]
         public async Task<IActionResult> editProduct([FromRoute] int id, ProductModel model)
         {
             if (ModelState.IsValid)
             {
                 int ids = await productRepository.editProduct(id, model);
                 if (ids == 0)
-                    return RedirectToAction("editProduct", new { isFailed = true });
+                    return RedirectToAction("editProduct", new { isFailed = true, productName = model.productName });
 
                 return RedirectToAction("editProduct", new { isSuccess = true , productName = model.productName});
             }

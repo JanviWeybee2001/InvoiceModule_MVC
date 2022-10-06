@@ -20,11 +20,12 @@ namespace Invoice_Module.Models
         public int ProductId { get; set; }
         public string ProductName { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Rate should be at least 1")]
         [Display(Name = "Current Rate")]
         [Required(ErrorMessage = "Please Enter Current Rate Of Product")]
         public int CurrentRate { get; set; }
 
-        [Range(1,int.MaxValue, ErrorMessage = "Quantity shold be at least 1")]
+        [Range(1,int.MaxValue, ErrorMessage = "Quantity should be at least 1")]
         [Display(Name = "Quantity")]
         [Required(ErrorMessage = "Please Enter Quantity")]
         public int Quantity { get; set; }

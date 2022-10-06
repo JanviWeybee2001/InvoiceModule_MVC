@@ -48,7 +48,7 @@ namespace Invoice_Module.Controllers
             return View();
         }
 
-        [HttpGet("EditProductRate/{id}/{productId}/{rate}")]
+        [HttpGet("EditProductRate/{id}")]
         public IActionResult editProductRate(int productId, int rate, bool isSuccess = false, bool isFailed = false, [FromRoute] int productRateId = 0)
         {
             ViewBag.IsSuccess = isSuccess;
@@ -56,15 +56,15 @@ namespace Invoice_Module.Controllers
             return View();
         }
 
-        [HttpPost("EditProductRate/{id}/{productId}/{rate}")]
+        [HttpPost("EditProductRate/{id}")]
         public async Task<IActionResult> editProductRate([FromRoute] int id, ProductRateModel productRateModel)
         {
             if (ModelState.IsValid)
             {
                 int ids = await productRateRepository.editProductRate(id, productRateModel);
                 if(ids == 0)
-                    return RedirectToAction("editProductRate", new { isFailed = true });
-                return RedirectToAction("editProductRate", new { isSuccess = true });
+                    return RedirectToAction("editProductRate", new { isFailed = true, productId = productRateModel.ProductId, rate = 0 });
+                return RedirectToAction("editProductRate", new { isSuccess = true , productId  = productRateModel.ProductId, rate = productRateModel.Rate});
             }
             return RedirectToAction("allProductRateItem");
         }
@@ -77,6 +77,7 @@ namespace Invoice_Module.Controllers
                 return RedirectToAction("allProductRateItem");
             }
             return null;
+            //return RedirectToAction("allProductRateItem");
         }
 
     }

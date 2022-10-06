@@ -57,16 +57,27 @@ namespace Invoice_Module.Repository
 
         public async Task<bool> DeleteProductAsync(int id, ProductModel productModel)
         {
-            if (id == productModel.id)
+            var check1 = _context.AssignParty.Where(x => x.productId == productModel.id).FirstOrDefault();
+            var check2 = _context.ProductRate.Where(x => x.productId == productModel.id).FirstOrDefault();
+            var checkInvoice = _context.Invoice.Where(x => x.ProductId == id).ToList();
+            if (check1 == null && check2 == null)
             {
-                var product = new Product()
+                if (id == productModel.id)
                 {
-                    id = id
-                };
-                _context.Product.Remove(product);
+                    var product = new Product()
+                    {
+                        id = id
+                    };
+                    _context.Product.Remove(product);
+                }
+                if (checkInvoice != null)
+                {
+                    _context.Invoice.RemoveRange(checkInvoice);
+                }
+                await _context.SaveChangesAsync();
+                return true;
             }
-            await _context.SaveChangesAsync();
-            return true;
+            return false;
         }
 
 

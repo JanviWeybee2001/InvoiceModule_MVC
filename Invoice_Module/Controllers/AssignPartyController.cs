@@ -55,24 +55,29 @@ namespace Invoice_Module.Controllers
             return View();
         }
 
-        [HttpGet("EditAssignParty/{id}/{partyId}/{productId}")]
+        [HttpGet("EditAssignParty/{id}")]
         public IActionResult editAssignParty(int partyId, int productId, bool isSuccess = false, bool isFailed = false, [FromRoute] int assignPartyId = 0)
         {
             ViewBag.IsSuccess = isSuccess;
             ViewBag.IsFailed = isFailed;
-            return View();
+            AssignPartyModel assignpartymodel = new AssignPartyModel()
+            {
+                partyId = partyId,
+                productId = productId
+            };
+            return View("editAssignParty", assignpartymodel);
         }
 
-        [HttpPost("EditAssignParty/{id}/{partyId}/{productId}")]
+        [HttpPost("EditAssignParty/{id}")]
         public async Task<IActionResult> editAssignParty([FromRoute] int id, AssignPartyModel assignPartyModel)
         {
             if (ModelState.IsValid)
             {
                 int ids = await _assignPartyRepository.editAssignParty(id, assignPartyModel);
                 if (ids == 0)
-                    return RedirectToAction("editAssignParty", new { isFailed = true });
-
-                return RedirectToAction("editAssignParty", new { isSuccess = true });
+                    return RedirectToAction("editAssignParty", new { isFailed = true, partyId = assignPartyModel.partyId, productId = assignPartyModel.productId });
+                                
+                return RedirectToAction("editAssignParty", new { isSuccess = true, partyId = assignPartyModel.partyId, productId  = assignPartyModel.productId});
             }
             return RedirectToAction("allAssignPartyItem");
         }

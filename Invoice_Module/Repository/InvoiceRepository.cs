@@ -19,6 +19,24 @@ namespace Invoice_Module.Repository
 
         public async Task<List<InvoiceModel>> GetAllInvoice()
         {
+
+            var check = _context.Party.Select(x => x.id).ToArray();
+            //var p = _context.Party.Select(x => x.id).Where();
+
+            //List<InvoiceModel> res = new List<InvoiceModel>();
+            //_context.Invoice.ForEachAsync(invoice => new InvoiceModel()
+            //{
+            //    Id = invoice.Id,
+            //    PartyId = invoice.PartyId,
+            //    PartyName = _context.Party.Where(x => x.id == invoice.PartyId).First().partyName,
+            //    ProductId = invoice.ProductId,
+            //    ProductName = _context.Product.Where(x => x.id == invoice.ProductId).First().productName,
+            //    CurrentRate = invoice.CurrentRate,
+            //    Quantity = invoice.Quantity,
+            //    Total = invoice.Total
+            //});
+
+
             return await _context.Invoice
                   .Select(invoice => new InvoiceModel()
                   {
@@ -31,6 +49,8 @@ namespace Invoice_Module.Repository
                       Quantity = invoice.Quantity,
                       Total = invoice.Total
                   }).ToListAsync();
+
+            //.Where(x=> x.PartyId != )
         }
 
         public async Task<int> InvoiceAdd(InvoiceModel invoiceModel)
